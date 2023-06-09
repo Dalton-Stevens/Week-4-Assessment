@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a random fortune</button>
+
+    <main>
+      <h1>Create Pokemon</h1>
+      <section>
+        <form id="create-pokemon">
+          <input type="text" id="name" placeholder="Name">
+          <input type="text" id="level" placeholder="Level">
+          <input type="text" id="health" placeholder="Health EVs">
+          <input type="text" id="atk" placeholder="Atk EVs">
+          <input type="text" id="def" placeholder="Def EVs">
+          <input type="text" id="spAtk" placeholder="SpAtk EVs">
+          <input type="text" id="spDef" placeholder="SpDef EVs">
+          <input type="text" id="speed" placeholder="Speed">
+          <button>Create</button>
+        </form>
+      </section>
+      <ul id="pokemon-list"></ul>
+    </main>
+    
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+    
+  </body>
+</html>
