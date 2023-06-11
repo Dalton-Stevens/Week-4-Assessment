@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+}
+
+header {
+    height: 100px;
+    background-color: blue;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+}
+
+form {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin: 10px;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+div {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+}
+

@@ -36,7 +36,7 @@ const showPokemon = pokemonArr => {
     pokemonList.innerHTML = ``;
 
     pokemonArr.forEach((pokemonObj, index) => {
-        let {name, level, stats} = pokemonObj;
+        let {name, stats} = pokemonObj;
         let list = document.createElement(`li`);
         let pokeName = document.createElement(`div`);
         let pokeLvl = document.createElement(`div`);
@@ -48,23 +48,34 @@ const showPokemon = pokemonArr => {
         let pokeSpeed = document.createElement(`div`);
         let releaseBtn = document.createElement(`button`);
         
-        // Add update event listener
-
-
-        
         pokeName.textContent = name;
-        pokeLvl.textContent = `Level: ${level}`;
-        pokeHealth.textContent = `Health: ${stats.health}`;
-        pokeAtk.textContent = `Atk: ${stats.atk}`;
-        pokeDef.textContent = `Def: ${stats.def}`;
-        pokeSpAtk.textContent = `SpAtk: ${stats.spAtk}`;
-        pokeSpDef.textContent = `SpDef: ${stats.spDef}`;
-        pokeSpeed.textContent = `Speed: ${stats.speed}`;
-
+        
+        pokeLvl.innerHTML = `
+        <span> Level: <button onclick="updatePokemon(${index}, 'minus', 'level')">-</button> ${stats.level} <button onclick="updatePokemon(${index}, 'plus', 'level')">+</button></span>
+        `
+        pokeHealth.innerHTML = `
+        <span> Health: <button onclick="updatePokemon(${index}, 'minus', 'health')">-</button> ${stats.health} <button onclick="updatePokemon(${index}, 'plus', 'health')">+</button></span>
+        `
+        pokeAtk.innerHTML = `
+        <span> Atk: <button onclick="updatePokemon(${index}, 'minus', 'atk')">-</button> ${stats.atk} <button onclick="updatePokemon(${index}, 'plus', 'atk')">+</button></span>
+        `
+        pokeDef.innerHTML = `
+        <span> Def: <button onclick="updatePokemon(${index}, 'minus', 'def')">-</button> ${stats.def} <button onclick="updatePokemon(${index}, 'plus', 'def')">+</button></span>
+        `
+        pokeSpAtk.innerHTML = `
+        <span> SpAtk: <button onclick="updatePokemon(${index}, 'minus', 'spAtk')">-</button> ${stats.spAtk} <button onclick="updatePokemon(${index}, 'plus', 'spAtk')">+</button></span>
+        `
+        pokeSpDef.innerHTML = `
+        <span> SpDef: <button onclick="updatePokemon(${index}, 'minus', 'spDef')">-</button> ${stats.spDef} <button onclick="updatePokemon(${index}, 'plus', 'spDef')">+</button></span>
+        `
+        pokeSpeed.innerHTML = `
+        <span> Speed: <button onclick="updatePokemon(${index}, 'minus', 'speed')">-</button> ${stats.speed} <button onclick="updatePokemon(${index}, 'plus', 'speed')">+</button></span>
+        `
+        
         releaseBtn.textContent = `Release`;
         releaseBtn.id = index;
         releaseBtn.addEventListener(`click`, releasePokemon);
-
+        
         list.appendChild(pokeName);
         list.appendChild(pokeLvl);
         list.appendChild(pokeHealth);
@@ -74,7 +85,7 @@ const showPokemon = pokemonArr => {
         list.appendChild(pokeSpDef);
         list.appendChild(pokeSpeed);
         list.appendChild(releaseBtn);
-
+        
         pokemonList.appendChild(list);
     })
 };
@@ -91,8 +102,8 @@ const addPokemon = evt => {
     evt.preventDefault()
     let obj = {
         name: nameInput.value,
-        level: levelInput.value,
         stats:{
+            level: levelInput.value,
             health: healthInput.value,
             atk: atkInput.value,
             def: defInput.value,
@@ -103,6 +114,15 @@ const addPokemon = evt => {
     };
 
     axios.post(`http://localhost:4000/api/pokemon/`, obj)
+        .then(res => {
+            showPokemon(res.data)
+        })
+        .catch(err => console.log(err))
+};
+
+const updatePokemon = (index, action, stat) => {
+    console.log(index, action, stat)
+    axios.put(`http://localhost:4000/api/pokemon/${index}`, {action, stat})
         .then(res => {
             showPokemon(res.data)
         })

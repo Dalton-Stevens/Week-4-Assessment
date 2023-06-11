@@ -12,6 +12,7 @@ const {
     getFortune,
     getPokemon,
     addPokemon,
+    updatePokemon,
     releasePokemon
 } = require('./controller')
 
@@ -19,6 +20,7 @@ app.get("/api/compliment", getCompliment);
 app.get(`/api/fortune`, getFortune);
 app.get(`/api/pokemon`, getPokemon);
 app.post(`/api/pokemon`, addPokemon);
+app.put(`/api/pokemon/:index`, updatePokemon);
 app.delete(`/api/pokemon/:index`, releasePokemon);
 
 
